@@ -15,6 +15,7 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class Ventana extends JFrame {
 
@@ -23,6 +24,14 @@ public class Ventana extends JFrame {
 	private JTextField textField1;
 	private JTextField textField2;
 	private JTextField textField3;
+
+	static JTextArea textAreaPID1;
+	static JTextArea textAreaPID2;
+	static JTextArea textAreaPID3;
+	
+	static JTextArea textAreaPIDpadre1;
+	static JTextArea textAreaPIDpadre2;
+	static JTextArea textAreaPIDpadre3;
 
 	/**
 	 * Launch the application.
@@ -78,13 +87,20 @@ public class Ventana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//programa a ejecutar introducido
 				String programa = textField1.getText();
-				
+
 				metodo.ejecutarPrograma(programa);
 			}
 		});
 		btn1.setBounds(70, 95, 89, 23);
 		contentPane.add(btn1);
 
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(100, 234, 173, 395);
+		contentPane.add(scrollPane);
+
+		JTextArea textAreaResultado1 = new JTextArea();
+		scrollPane.setViewportView(textAreaResultado1);
+		textAreaResultado1.setEditable(false);
 
 
 		JButton btn2 = new JButton("Start");
@@ -92,18 +108,35 @@ public class Ventana extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//comando a ejecutar introducido
 				String comando = textField2.getText();
-				
-				metodo.ejecutarComando(comando);
+
+				//seteamos en el textarea la respuesta
+				textAreaResultado1.setText(metodo.ejecutarComando(comando));
 			}
 		});
-		
+
+
+
 		btn2.setBounds(200, 95, 89, 23);
 		contentPane.add(btn2);
+
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(308, 234, 173, 395);
+		contentPane.add(scrollPane_1);
+
+		JTextArea textArea2 = new JTextArea();
+		scrollPane_1.setViewportView(textArea2);
+		textArea2.setEditable(false);
+
+
 
 		JButton btn3 = new JButton("Start");
 		btn3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//**
+				//recogemos el texto introducido por el usuario
+				String dato = textField3.getText();
+
+				//seteamos el return en el textarea
+				textArea2.setText(metodo.llamarPrograma(dato));
 			}
 		});
 		btn3.setBounds(330, 95, 89, 23);
@@ -124,14 +157,72 @@ public class Ventana extends JFrame {
 		lblResultado.setBounds(10, 276, 65, 14);
 		contentPane.add(lblResultado);
 
-		JTextArea textArea2 = new JTextArea();
-		textArea2.setEditable(false);
-		textArea2.setBounds(308, 234, 173, 395);
-		contentPane.add(textArea2);
+		//pid proceso 1
+		textAreaPID1 = new JTextArea();
+		textAreaPID1.setEditable(false);
+		textAreaPID1.setBounds(70, 160, 86, 19);
+		contentPane.add(textAreaPID1);
 
-		JTextArea textArea1 = new JTextArea();
-		textArea1.setEditable(false);
-		textArea1.setBounds(100, 234, 173, 395);
-		contentPane.add(textArea1);
+		//pid proceso 2
+		textAreaPID2 = new JTextArea();
+		textAreaPID2.setEditable(false);
+		textAreaPID2.setBounds(200, 160, 86, 19);
+		contentPane.add(textAreaPID2);
+
+		//pid proceso 3
+		textAreaPID3 = new JTextArea();
+		textAreaPID3.setEditable(false);
+		textAreaPID3.setBounds(330, 160, 194, 19);
+		contentPane.add(textAreaPID3);
+
+		//pid padre 1
+		textAreaPIDpadre1 = new JTextArea();
+		textAreaPIDpadre1.setEditable(false);
+		textAreaPIDpadre1.setBounds(70, 207, 86, 19);
+		contentPane.add(textAreaPIDpadre1);
+
+		//pid padre 2
+		textAreaPIDpadre2 = new JTextArea();
+		textAreaPIDpadre2.setEditable(false);
+		textAreaPIDpadre2.setBounds(200, 207, 86, 19);
+		contentPane.add(textAreaPIDpadre2);
+
+		//pid padre 3
+		textAreaPIDpadre3 = new JTextArea();
+		textAreaPIDpadre3.setEditable(false);
+		textAreaPIDpadre3.setBounds(330, 207, 86, 19);
+		contentPane.add(textAreaPIDpadre3);
 	}
+
+	//metodo para insertar el pid1 al textarea
+	public static void appendTextPID1(String text) {
+		textAreaPID1.append(text + "\n");
+	}
+
+	//metodo para insertar el pid2 al textarea
+	public static void appendTextPID2(String text) {
+		textAreaPID2.append(text + "\n");
+	}
+
+	//metodo para insertar el pid3 al textarea
+	public static void appendTextPID3(String text) {
+		textAreaPID3.append(text + "\n");
+	}
+	
+	//metodo para insertar el pidPadre1 al textarea
+		public static void appendTextPIDPadre1(String text) {
+			textAreaPIDpadre1.append(text + "\n");
+		}
+
+		//metodo para insertar el pidPadre2 al textarea
+		public static void appendTextPIDPadre2(String text) {
+			textAreaPIDpadre2.append(text + "\n");
+		}
+
+		//metodo para insertar el pidPadre3 al textarea
+		public static void appendTextPIDPadre3(String text) {
+			textAreaPIDpadre3.append(text + "\n");
+		}
+	
+	
 }
